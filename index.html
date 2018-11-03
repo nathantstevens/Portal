@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal - AR.js</title>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/demos/demo-portal-door/src/threex-portal-door.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/demos/demo-portal-door/src/aframe-portal-door.js"></script>
+    <script src="https://ideaspacevr.github.io/aframe-particle-system-component/dist/aframe-particle-system-component.min.js"></script>
+</head>
+
+<!-- Nathan Stevens - 10/31/18 Portal AR.js example
+Using A-Frame library: https://aframe.io/
+Using AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js
+Wind sound effect from: http://soundbible.com/1810-Wind.html
+Uses multiple lighting sources
+Uses realtime ultra hd shadows
+Uses 3D sound
+Uses custom AR marker
+Fast rotating cubes to demonstrate high frame rate-->
+
+<body style='margin : 0px; overflow: hidden;'>
+    <a-scene embedded arjs='sourceType: webcam;'>
+
+        <a-entity position="0 2.25 -15" particle-system="preset: dust; particleCount: 100000; velocityValue: 50 0 0;"></a-entity>
+
+        <a-entity light="type: ambient; intensity: .5; color: #aef1ff;"></a-entity>
+        <a-entity light="type: directional;
+                   castShadow: true;
+                   intensity: .7;
+                   shadowMapHeight: 4096;
+                   shadowMapWidth: 4096;
+                   color: #aef1ff;"
+                  position=".4 3 -.4">
+        </a-entity>
+
+        <a-entity light="type: hemisphere; color: #33C; groundColor: #3C3; intensity: .5"></a-entity>
+
+        <a-portal-door url='https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg' position='0 0 -1' scale='2 1 2' rotation='0 0 0'>
+            <!--<a-animation attribute="rotation" to="0 360 0" dur="10000" easing="linear"
+                         repeat="indefinite"></a-animation>-->
+        </a-portal-door>
+
+        <a-tetrahedron shadow="cast: true" position="1.5 1 -1.5" color="blue" scale=".5 .5 .5">
+            <a-animation attribute="rotation" to="360 0 360" dur="1000" easing="linear"
+                         repeat="indefinite"></a-animation>
+        </a-tetrahedron>
+
+        <a-box shadow="cast: true" position="-1.5 1 0" color="blue" scale=".5 .5 .5">
+            <a-animation attribute="rotation" to="360 0 360" dur="1000" easing="linear"
+                         repeat="indefinite"></a-animation>
+        </a-box>
+
+        <a-sound src="wind.mp3" autoplay="true" loop="true" position="0 0 0"></a-sound>
+        <a-plane material="opacity:.8" position="0 0 1.1" rotation="-90 0 0" scale="4 4" shadow="receive: true"></a-plane>
+        <a-text value="Nathan Stevens\nAR.js example\nPortal" position="0 .1 1" align="center" rotation="-90 0 0" color="#ff0000"></a-text> <!--red text center-->
+        <a-marker-camera id="myCamera" type="pattern" url="pattern-marker.patt"></a-marker-camera>
+    </a-scene>
+</body>
+</html>
